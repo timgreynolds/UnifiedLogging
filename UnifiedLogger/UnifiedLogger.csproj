@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net8.0-ios; net8.0-maccatalyst</TargetFrameworks>
-    <UseMaui>true</UseMaui>
-    <SkipValidateMauiImplicitPackageReferences>false</SkipValidateMauiImplicitPackageReferences>
     <SingleProject>true</SingleProject>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Mahonkin.UnifiedLogger</PackageId>
+    <Description>Implementation of ILoggerProvider for logging to Apple Unified Logging on Apple devices.</Description>
     <Version>0.0.11</Version>
     <Authors>Timothy Reynolds</Authors>
     <Company></Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageOutputPath>..\..\nupkg</PackageOutputPath>
+    <PackageTags>maui;macos;ios;oslog;logging;log</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
