@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
-namespace com.mahonkin.tim.UnifiedLogger;
+namespace com.mahonkin.tim.UnifiedLogging;
 
 [ProviderAlias("UnifiedLogger")]
 public sealed class UnifiedLoggerProvider : ILoggerProvider
