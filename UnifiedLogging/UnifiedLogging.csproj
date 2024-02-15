@@ -4,41 +4,20 @@
     <OutputType>Library</OutputType>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-<<<<<<< HEAD
-    <!-- <PackageId>Mahonkin.UnifiedLogger</PackageId>
-    <Description>Implementation of ILoggerProvider for Apple Unified Logging.</Description>
-    <Version>0.0.11</Version>
-=======
     <PackageId>Mahonkin.UnifiedLogging</PackageId>
     <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
     <Version>0.0.24</Version>
->>>>>>> a02aa1e ( Changes to be committed:)
+    <PackageId>Mahonkin.UnifiedLogging</PackageId>
+    <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
+    <Version>0.0.24</Version>
     <Authors>Timothy Reynolds</Authors>
     <Company></Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-<<<<<<< HEAD
     <PackageOutputPath>..\..\nupkg</PackageOutputPath>
-    <PackageTags>macos;ios;oslog;logging;log</PackageTags> -->
-=======
-    <PackageIcon>Logo.png</PackageIcon>
     <PackageTags>macos;ios;oslog;logging;log</PackageTags>
->>>>>>> a02aa1e ( Changes to be committed:)
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <CreateDocumentationFile>true</CreateDocumentationFile>
-    <IncludeSymbols>true</IncludeSymbols>
-    <EmbedAllSources>true</EmbedAllSources>
-    <DebugType>Embedded</DebugType>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-    <None Include="Images\Logo.png" Pack="true" PackagePath="" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Mahonkin.OSLog" Version="0.0.12" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.*" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
   </ItemGroup>
 </Project>
