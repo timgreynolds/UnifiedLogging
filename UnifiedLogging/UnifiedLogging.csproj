@@ -6,18 +6,23 @@
     <Nullable>enable</Nullable>
     <PackageId>Mahonkin.UnifiedLogging</PackageId>
     <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
-    <Version>0.0.24</Version>
-    <PackageId>Mahonkin.UnifiedLogging</PackageId>
-    <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
-    <Version>0.0.24</Version>
+    <Version>0.0.35</Version>
     <Authors>Timothy Reynolds</Authors>
     <Company></Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageOutputPath>..\..\nupkg</PackageOutputPath>
     <PackageTags>macos;ios;oslog;logging;log</PackageTags>
+    <PackageIcon>Logo.png</PackageIcon>
+    <PackageTags>macos;ios;oslog;logging;log;logger</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="Images\Logo.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mahonkin.OSLogger" Version="0.0.31" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.*" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.*" />
   </ItemGroup>
 </Project>

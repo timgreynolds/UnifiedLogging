@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Options;
 
-namespace com.mahonkin.tim.logging;
+namespace com.mahonkin.tim.logging.UnifiedLogging;
 
-public class UnifiedLoggingOptions : IOptions<UnifiedLoggingOptions>
+public class UnifiedLoggerOptions : IOptions<UnifiedLoggerOptions>
 {
-    public string Subsystem { get; set; } = string.Empty;
+    public string? Subsystem { get; set; }
 
-    public UnifiedLoggingOptions Value => this;
+    public UnifiedLoggerOptions Value => this;
 }
