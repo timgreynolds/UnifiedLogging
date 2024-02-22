@@ -29,5 +29,4 @@ public sealed class UnifiedLoggerProvider : ILoggerProvider
     }
 
     private UnifiedLoggerOptions GetCurrentOptions() => _currentOptions;
-
 }

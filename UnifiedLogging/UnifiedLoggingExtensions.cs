@@ -8,7 +8,7 @@ namespace com.mahonkin.tim.logging.UnifiedLogging.Extensions;
 
 public static class UnifiedLoggingExtensions
 {
-    private static ILoggingBuilder AddUnifiedLogger(this ILoggingBuilder builder)
+    public static ILoggingBuilder AddUnifiedLogger(this ILoggingBuilder builder)
     {
         builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, UnifiedLoggerProvider>());
         LoggerProviderOptions.RegisterProviderOptions<UnifiedLoggerOptions, UnifiedLoggerProvider>(builder.Services);
