@@ -1,5 +1,5 @@
-namespace com.mahonkin.tim.UnifiedLogging;
+namespace com.mahonkin.tim.logging;
 
-public static class UnifiedLoggingConfig
+public class UnifiedLoggingConfig 
 {
 }

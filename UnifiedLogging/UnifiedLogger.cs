@@ -1,31 +1,27 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
+using System;
 using Microsoft.Extensions.Logging;
 
-namespace com.mahonkin.tim.UnifiedLogging;
+namespace com.mahonkin.tim.logging;
 
-public class UnifiedLogger : IDisposable, ILogger
+public class UnifiedLogger(string category) : ILogger
 {
-    [DllImport("libSystem.dylib", EntryPoint = "os_log_create")]
-    private static extern IntPtr os_log_create(string subsystem, string category);
+    private static readonly string _subsystem = System.Reflection.Assembly.GetCallingAssembly().GetName().Name ?? typeof(UnifiedLogger).Name;
 
-    public UnifiedLogger(string category)
-    {
-        os_log_create(Assembly.GetCallingAssembly().GetName().FullName, category);
-    }
+    private IntPtr _logPtr = OSLog.Create(_subsystem, category);
 
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
-
-    public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;
+    public bool IsEnabled(LogLevel logLevel) => OSLog.IsEnabled(_logPtr, OSLog.GetOSLogType(logLevel));
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
-        Console.WriteLine($"{logLevel} {eventId} {state} {exception?.Message} {formatter(state, exception)}");
-    }
-
-    public void Dispose()
-    {
-        Console.WriteLine("Diposing");
+        OSLog.Log(_logPtr, OSLog.GetOSLogType(logLevel), formatter(state, exception));
+        if (logLevel == LogLevel.Error)
+        {
+            OSLog.LogError(_logPtr, formatter(state, exception));
+        }
+        if (logLevel == LogLevel.Critical)
+        {
+            OSLog.LogCritical(_logPtr, formatter(state, exception));
+        }
     }
 }
