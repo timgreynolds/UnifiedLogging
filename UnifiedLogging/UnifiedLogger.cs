@@ -11,7 +11,7 @@ public class UnifiedLogger : ILogger
     public UnifiedLogger(string category, Func<UnifiedLoggerOptions> getCurrentOptions)
     {
         string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().Name : getCurrentOptions().Subsystem;
-        _logPtr = OSLogger.Create(subsystem ?? string.Empty, category);
+        _logPtr = OSLogger.Create(subsystem ?? "UnifiedLogger", category);
     }
 
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;

@@ -20,7 +20,7 @@ public sealed class UnifiedLoggerProvider : ILoggerProvider
         _onChangeToken = options.OnChange(updatedOptions => _currentOptions = updatedOptions);
     }
 
-    public ILogger CreateLogger(string category) => _loggers.GetOrAdd(category, name => new UnifiedLogger(name, GetCurrentOptions));
+    public ILogger CreateLogger(string category) => _loggers.GetOrAdd(category, name => new UnifiedLogger(category, GetCurrentOptions));
 
     public void Dispose()
     {
