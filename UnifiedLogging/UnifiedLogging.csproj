@@ -4,14 +4,13 @@
     <OutputType>Library</OutputType>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Mahonkin.UnifiedLogging</PackageId>
+    <PackageId>TimGReynolds.UnifiedLogging</PackageId>
     <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
-    <Version>1.0.0-rc1</Version>
+    <Version>1.0.0-rc2</Version>
     <Authors>Timothy Reynolds</Authors>
     <Company></Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>macos;ios;oslog;logging;log</PackageTags>
     <PackageIcon>Logo.png</PackageIcon>
     <PackageTags>macos;ios;oslog;logging;log;logger</PackageTags>
   </PropertyGroup>
@@ -20,7 +19,7 @@
     <None Include="Images\Logo.png" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mahonkin.OSLogger" Version="1.0.0-rc1" />
+    <PackageReference Include="TimGReynolds.OSLogger" Version="1.0.0-rc2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.*" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.*" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.*" />

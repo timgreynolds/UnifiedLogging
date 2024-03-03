@@ -1,28 +1,29 @@
-# UnifiedLogger 
+# UnifiedLogger
 
 Implementation of an ILoggerProvider to write log messages to Apple's Unified Logging system on iOS and Mac platforms.
 
 ## Getting started
 
-Explain how to use your package, provide clear and concise getting started instructions, including any necessary steps.
-
 ### Prerequisites
 
-What are specific minimum requirements to use your packages? Consider excluding this section if your package works without any additional setup beyond simple package installation.
+* net7.0 or net8.0 SDK
+* maui-maccatalyst and maui-ios workloads
+* Net7 or Net8 MAUI project targeting iOS or MacCatalyst
+  or Net7/Net8 ASP.Net Core web application
+
+### Installation
 
 ## Usage
 
-Examples about how to use your package by providing code snippets/example images, or samples links on GitHub if applicable. 
+* Add the Unified Logging provider to the dependency injection container.
+  
 
-- Provide sample code using code snippets
-- Include screenshots, diagrams, or other visual help users better understand how to use your package
+## Configuration
 
 ## Additional documentation
 
-Provide links to more resources: List links such as detailed documentation, tutorial videos, blog posts, or any other relevant documentation to help users get the most out of your package.
-
+[Logging in .NET Core and ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-8.0)
+[Implement a custom Logging Provider](https://learn.microsoft.com/en-us/dotnet/core/extensions/custom-logging-provider)
 ## Feedback
 
-Where and how users can leave feedback?
-
-- Links to a GitHub repository where could open issues, Twitter, a Discord channel, bug tracker, or other platforms where a package consumer can connect with the package author.
+[Github Repository Issues](https://github.com/timgreynolds/UnifiedLogging/issues)

@@ -4,7 +4,7 @@ using System.Runtime.Versioning;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging;
+namespace com.github.timgreynolds.logging.UnifiedLogging;
 
 [UnsupportedOSPlatform("browser")]
 [ProviderAlias("UnifiedLogging")]
