@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging;
+namespace com.github.timgreynolds.logging.UnifiedLogging;
 
 public class UnifiedLogger : ILogger
 {
