@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging.Extensions;
+namespace com.github.timgreynolds.logging.UnifiedLogging.Extensions;
 
 public static class UnifiedLoggingExtensions
 {
