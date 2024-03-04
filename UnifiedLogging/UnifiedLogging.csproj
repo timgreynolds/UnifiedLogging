@@ -19,7 +19,7 @@
     <None Include="Images\Logo.png" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mahonkin.OSLogger" Version="1.0.0-rc2" />
+    <PackageReference Include="Mahonkin.OSLogger" Version="1.0.0-rc3" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.*" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.*" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.*" />
