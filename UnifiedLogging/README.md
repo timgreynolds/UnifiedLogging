@@ -102,15 +102,15 @@ builder.logging.AddUnifiedLogging(options => {
 });
 ```
 
-Passing the value in the `AddUnifiedLogging()` method will override the value in the settings file and thus removes the option for run-time configuration of `subsystem`. Note the use of using BundleIdentifier in the  above example for a MAUI app. If not set in the file or overridden in `AddUnifiedLogging()` it will be set to the string `UnifiedLogging`.
+Passing the value in the `AddUnifiedLogging()` method will override the value in the settings file and thus removes the option for run-time configuration of `Subsystem`. Note the use of using BundleIdentifier in the  above example for a MAUI app. If not set in the file or overridden in `AddUnifiedLogging()` it will default to the string `UnifiedLogging`.
 
-#### Special Notes for MAUI apps
+### Special Notes for MAUI apps
 
 As of this time (early 2024) `MauiAppBuilder()` does not support automatically loading configuration from an appsettings file. This makes perfect sense because providing the user configuration options via a file on the device makes little sense in a phone idiom. The app developer would need to provide a mechanism to either edit this file or load the configuration from the file into custom platform-specific settings.
 
 However, while developing and debugging an application it may be advantageous to the devloper to have this option available. Additionally, it allows the opportunity for the developer to take advantage of the methods mentioned; provide a mechanism to edit the configuration file or load the configuration into custom settings as well as supply a static configuration at install time.
 
-1. Create an `appsettings.json` file in the MAUI project and place it in the `Resources\Raw` folder.
+1. Create an `appsettings.json` file in the MAUI project and place it in the `Resources\Raw` folder. (The file is not required to be called `appsettings.json`. Replace `appsettings.json` with any appropriate name.)
 2. Place your logging configuration in the file. It is important that the root `Logging` element be included.
 
 ```*.cs
