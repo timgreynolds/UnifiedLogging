@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-namespace com.github.timgreynolds.logging.UnifiedLogging;
+namespace com.mahonkin.tim.logging.UnifiedLogging;
 
 public class UnifiedLoggerOptions : IOptions<UnifiedLoggerOptions>
 {
