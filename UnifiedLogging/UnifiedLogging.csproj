@@ -1,27 +1,70 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Library</OutputType>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageId>Mahonkin.UnifiedLogging</PackageId>
-    <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
-    <Version>1.0.0-rc4</Version>
-    <Authors>Timothy Reynolds</Authors>
-    <Company></Company>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>Logo.png</PackageIcon>
-    <PackageTags>macos;ios;oslog;logging;log;logger</PackageTags>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-    <None Include="Images\Logo.png" Pack="true" PackagePath="" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Mahonkin.OSLogger" Version="1.0.0-rc4" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.*" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.*" />
-  </ItemGroup>
+    <Import Project="$(MSBuildProjectDirectory)\Version.props" />
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <OutputType>Library</OutputType>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PackageId>Mahonkin.UnifiedLogging</PackageId>
+        <Title />
+        <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
+        <Authors>Timothy Reynolds</Authors>
+        <Company />
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>Logo.png</PackageIcon>
+        <PackageTags>macos;ios;oslog;logging;log;logger</PackageTags>
+        <MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
+        <MinorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
+        <BuildNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([MSBuild]::Add($([System.Version]::Parse($(LastReleaseVersion)).Build), 1))</BuildNumber>
+        <VersionPrefix Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$(MajorNumber).$(MinorNumber).$(BuildNumber)</VersionPrefix>
+        <VersionSuffix Condition=" '$(Configuration)' == 'Release' " />
+        <VersionPrefix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseVersion' != '' ">$(LastReleaseVersion)</VersionPrefix>
+        <VersionSuffix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseDateTime' != '' ">$([System.Convert]::ToInt32($([System.TimeSpan]::FromTicks($([MsBuild]::Subtract($([System.DateTime]::Now.Ticks), $([System.DateTime]::Parse($(LastReleaseDateTime)).Ticks)))).TotalMinutes)))</VersionSuffix>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <CreateDocumentationFile>true</CreateDocumentationFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <EmbedAllSources>true</EmbedAllSources>
+        <DebugType>Embedded</DebugType>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="README.md"
+              Pack="true"
+              PackagePath="\" />
+        <None Include="Images\Logo.png"
+              Pack="true"
+              PackagePath="" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Mahonkin.OSLogger"
+                          Version="1.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging"
+                          Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Configuration"
+                          Version="8.0.0" />
+        <PackageReference Include="System.Configuration.ConfigurationManager"
+                          Version="8.0.0" />
+    </ItemGroup>
+    <Target Name="SaveLastReleaseVersion"
+            AfterTargets="Build"
+            Condition=" '$(Configuration)' == 'Release' And '$(VersionPrefix)' != '' ">
+        <PropertyGroup>
+            <LinesToWrite>                
+                &lt;Project&gt;
+                &lt;PropertyGroup&gt;
+                &lt;LastReleaseVersion&gt;$(VersionPrefix)&lt;/LastReleaseVersion&gt;
+                &lt;LastReleaseDateTime&gt;$([System.DateTime]::Now.ToString(yyyy/MM/dd HH:mm:00))&lt;/LastReleaseDateTime&gt;
+                &lt;/PropertyGroup&gt;
+                &lt;/Project&gt;
+            </LinesToWrite>
+        </PropertyGroup>
+        <WriteLinesToFile File="$(MSBuildProjectDirectory)\Version.props"
+                          Lines="$(LinesToWrite)"
+                          Overwrite="true"
+                          Encoding="UTF-8" />
+    </Target>
 </Project>
