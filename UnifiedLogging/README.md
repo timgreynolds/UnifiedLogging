@@ -6,10 +6,9 @@ Implementation of an ILoggerProvider that writes log messages to Apple's Unified
 
 ### Prerequisites
 
-- net7.0 or net8.0 SDK
+- net7.0, net8.0, or nt9.0 SDK
 - maui-maccatalyst and maui-ios workloads
-- Net7 or Net8 MAUI project targeting iOS or MacCatalyst
-  or Net7/Net8 ASP.Net Core web application
+- Net7, Net8, or Net9 MAUI project targeting iOS or MacCatalyst or similar ASP.Net Core web application
 
 ### Installation
 
