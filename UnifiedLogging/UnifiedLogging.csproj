@@ -8,7 +8,9 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>Mahonkin.UnifiedLogging</PackageId>
         <Title>Apple Unified Logging implemented as a LoggerProvider.</Title>
-        <Description>Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging.</Description>
+        <Description>            
+            Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging. Uses the Mahonkin.OSLogger package that provides a native Apple Unified Logging OSLog object to write log messages.
+        </Description>
         <Authors>Timothy Reynolds</Authors>
         <Company />
         <Copyright>Copyright 2023-2024 Timothy Reynolds</Copyright>
@@ -20,7 +22,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>Logo.png</PackageIcon>
         <PackageReleaseNotes />
-        <CreateDocumentationFile>true</CreateDocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
         <MinorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
@@ -43,33 +45,24 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Mahonkin.OSLogger"
-                          Version="1.0.2-26385" />
-        <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
-                          Include="Microsoft.Extensions.Logging"
-                          Version="9.0.0-preview.4.24266.19" />
-        <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
-                          Include="Microsoft.Extensions.Logging.Configuration"
-                          Version="9.0.0-preview.4.24266.19" />
+                          Version="1.0.2-30439" />
         <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
                           Include="System.Configuration.ConfigurationManager"
                           Version="9.0.0-preview.4.24266.19" />
-        <PackageReference Condition="$(TargetFramework.Contains(net8.0))"
-                          Include="Microsoft.Extensions.Logging"
-                          Version="8.*" />
-        <PackageReference Condition="$(TargetFramework.Contains(net8.0))"
-                          Include="Microsoft.Extensions.Logging.Configuration"
-                          Version="8.*" />
         <PackageReference Condition="$(TargetFramework.Contains(net8.0))"
                           Include="System.Configuration.ConfigurationManager"
                           Version="8.*" />
         <PackageReference Condition="$(TargetFramework.Contains(net7.0))"
-                          Include="Microsoft.Extensions.Logging"
+                          Include="System.Configuration.ConfigurationManager"
                           Version="7.*" />
+        <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
+                          Include="Microsoft.Extensions.Logging.Configuration"
+                          Version="9.0.0-preview.4.24266.19" />
+        <PackageReference Condition="$(TargetFramework.Contains(net8.0))"
+                          Include="Microsoft.Extensions.Logging.Configuration"
+                          Version="8.*" />
         <PackageReference Condition="$(TargetFramework.Contains(net7.0))"
                           Include="Microsoft.Extensions.Logging.Configuration"
-                          Version="7.*" />
-        <PackageReference Condition="$(TargetFramework.Contains(net7.0))"
-                          Include="System.Configuration.ConfigurationManager"
                           Version="7.*" />
     </ItemGroup>
     <Target Name="SaveLastReleaseVersion"
