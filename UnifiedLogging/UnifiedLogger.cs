@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 
 namespace com.mahonkin.tim.logging.UnifiedLogging;
 
+/// <summary>
+/// <see cref="ILogger"/>Implementation that writes messages to the Apple Unified Logging framework. 
+/// </summary>
 public class UnifiedLogger : ILogger
 {
     private IntPtr _logPtr;

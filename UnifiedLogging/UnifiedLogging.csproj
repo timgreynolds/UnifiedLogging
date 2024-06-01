@@ -45,7 +45,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Mahonkin.OSLogger"
-                          Version="1.0.2-30439" />
+                          Version="1.0.2-40599" />
         <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
                           Include="System.Configuration.ConfigurationManager"
                           Version="9.0.0-preview.4.24266.19" />
