@@ -1,10 +1,11 @@
 using System;
+using com.mahonkin.tim.logging.UnifiedLogging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging.Extensions;
+namespace com.mahonkin.tim.extensions.Logging;
 
 /// <summary>
 /// Extension class that implements helper methods to be used with the <see cref="ILoggingBuilder"/>class in the dependency injection container.

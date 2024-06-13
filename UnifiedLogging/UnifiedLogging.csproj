@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$(MSBuildProjectDirectory)\Version.props" />
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net8.0;net9.0</TargetFrameworks>
+        <TargetFrameworks>net7.0;net8.0;</TargetFrameworks>
         <OutputType>Library</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -45,7 +45,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Mahonkin.OSLogger"
-                          Version="1.0.2-40599" />
+                          Version="1.0.3" />
         <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
                           Include="System.Configuration.ConfigurationManager"
                           Version="9.0.0-preview.4.24266.19" />
