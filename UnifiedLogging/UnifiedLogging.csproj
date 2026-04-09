@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$(MSBuildProjectDirectory)\Version.props" />
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net8.0;</TargetFrameworks>
+        <TargetFrameworks>net9.0;net10.0;</TargetFrameworks>
         <OutputType>Library</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -13,7 +13,7 @@
         </Description>
         <Authors>Timothy Reynolds</Authors>
         <Company />
-        <Copyright>Copyright 2023-2024 Timothy Reynolds</Copyright>
+        <Copyright>Copyright 2023-2026 Timothy Reynolds</Copyright>
         <PackageTags>macos;ios;maccatalyst;oslog;logging;log;logger;UnifiedLogging;maui;xamarin</PackageTags>
         <PackageProjectUrl>https://github.com/timgreynolds/UnifiedLogging</PackageProjectUrl>
         <RepositoryUrl>git@github.com:timgreynolds/UnifiedLogging.git</RepositoryUrl>
