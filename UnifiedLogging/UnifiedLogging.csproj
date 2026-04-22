@@ -15,53 +15,41 @@
         <Company />
         <Copyright>Copyright 2023-2026 Timothy Reynolds</Copyright>
         <PackageTags>macos;ios;maccatalyst;oslog;logging;log;logger;UnifiedLogging;maui;xamarin</PackageTags>
-        <PackageProjectUrl>https://github.com/timgreynolds/UnifiedLogging</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/timgreynolds/UnifiedLogging </PackageProjectUrl>
         <RepositoryUrl>git@github.com:timgreynolds/UnifiedLogging.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <RepositoryBranch>main</RepositoryBranch>
+        <RepositoryBranch>master</RepositoryBranch>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>Logo.png</PackageIcon>
         <PackageReleaseNotes />
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
+<!-- Increment Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
+		<MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
         <MinorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
         <BuildNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([MSBuild]::Add($([System.Version]::Parse($(LastReleaseVersion)).Build), 1))</BuildNumber>
         <VersionPrefix Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$(MajorNumber).$(MinorNumber).$(BuildNumber)</VersionPrefix>
         <VersionSuffix Condition=" '$(Configuration)' == 'Release' " />
         <VersionPrefix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseVersion' != '' ">$(LastReleaseVersion)</VersionPrefix>
         <VersionSuffix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseDateTime' != '' ">$([System.Convert]::ToInt32($([System.TimeSpan]::FromTicks($([MsBuild]::Subtract($([System.DateTime]::Now.Ticks), $([System.DateTime]::Parse($(LastReleaseDateTime)).Ticks)))).TotalMinutes)))</VersionSuffix>
+<!-- -->
         <IncludeSymbols Condition=" '$(Configuration)' == 'Debug' ">true</IncludeSymbols>
         <EmbedAllSources Condition=" '$(Configuration)' == 'Debug' ">true</EmbedAllSources>
         <DebugType Condition=" '$(Configuration)' == 'Debug' ">Embedded</DebugType>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="README.md"
-              Pack="true"
-              PackagePath="\" />
-        <None Include="Images\Logo.png"
-              Pack="true"
-              PackagePath="\" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Mahonkin.OSLogger"
-                          Version="1.0.3" />
-        <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
-                          Include="System.Configuration.ConfigurationManager"
-                          Version="9.*" />
-        <PackageReference Condition="$(TargetFramework.Contains(net10.0))"
-                          Include="System.Configuration.ConfigurationManager"
-                          Version="10.*" />
-        <PackageReference Condition="$(TargetFramework.Contains(net10.0))"
-                          Include="Microsoft.Extensions.Logging.Configuration"
-                          Version="10.*" />
-        <PackageReference Condition="$(TargetFramework.Contains(net9.0))"
-                          Include="Microsoft.Extensions.Logging.Configuration"
-                          Version="9.*" />
+        <PackageReference Include="Mahonkin.OSLogger" Version="1.0.3" />
+        <PackageReference Condition="$(TargetFramework.Contains(net9.0))" Include="System.Configuration.ConfigurationManager" Version="9.*" />
+        <PackageReference Condition="$(TargetFramework.Contains(net10.0))" Include="System.Configuration.ConfigurationManager" Version="10.*" />
+        <PackageReference Condition="$(TargetFramework.Contains(net10.0))" Include="Microsoft.Extensions.Logging.Configuration" Version="10.*" />
+        <PackageReference Condition="$(TargetFramework.Contains(net9.0))" Include="Microsoft.Extensions.Logging.Configuration" Version="9.*" />
     </ItemGroup>
-    <Target Name="SaveLastReleaseVersion"
-            AfterTargets="Build"
-            Condition=" '$(Configuration)' == 'Release' And '$(VersionPrefix)' != '' ">
+<!-- Set Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
+    <Target Name="SaveLastReleaseVersion" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' And '$(VersionPrefix)' != '' ">
         <PropertyGroup>
             <LinesToWrite>                
                 &lt;Project&gt;
@@ -72,9 +60,6 @@
                 &lt;/Project&gt;
             </LinesToWrite>
         </PropertyGroup>
-        <WriteLinesToFile File="$(MSBuildProjectDirectory)\Version.props"
-                          Lines="$(LinesToWrite)"
-                          Overwrite="true"
-                          Encoding="UTF-8" />
+        <WriteLinesToFile File="$(MSBuildProjectDirectory)\Version.props" Lines="$(LinesToWrite)" Overwrite="true" Encoding="UTF-8" />
     </Target>
 </Project>
