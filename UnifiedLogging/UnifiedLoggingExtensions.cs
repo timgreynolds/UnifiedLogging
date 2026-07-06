@@ -1,5 +1,5 @@
 using System;
-using com.mahonkin.tim.logging.UnifiedLogging;
+using com.mahonkin.tim.Logging.UnifiedLogging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;

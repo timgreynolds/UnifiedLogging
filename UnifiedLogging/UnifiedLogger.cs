@@ -1,10 +1,9 @@
 using System;
 using System.Reflection;
 using com.mahonkin.tim.extensions.Logging;
-using com.mahonkin.tim.logging;
 using Microsoft.Extensions.Logging;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging;
+namespace com.mahonkin.tim.Logging.UnifiedLogging;
 
 /// <summary>
 /// <see cref="ILogger"/>Implementation that writes messages to the Apple Unified Logging framework. 
@@ -19,13 +18,12 @@ public class UnifiedLogger : ILogger
     /// <inheritdoc cref="ILogger"/>
     public UnifiedLogger(string category, Func<UnifiedLoggerOptions> getCurrentOptions)
     {
-        string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().Name : getCurrentOptions().Subsystem;
+        string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().FullName : getCurrentOptions().Subsystem;
         _logPtr = OSLogger.Create(subsystem ?? "UnifiedLogger", category);
     }
     #endregion Constructors
 
     #region Public Methods
-
     /// <inheritdoc/>
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
 
