@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UserSecretsId>dotnet-Terminal-685e9f7e-5398-4b0b-9f66-1ca256932ff5</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mahonkin.UnifiedLogging" Version="1.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.*" />
+    <ProjectReference Include="../../UnifiedLogging/UnifiedLogging.csproj" />
+  </ItemGroup>
+</Project>
