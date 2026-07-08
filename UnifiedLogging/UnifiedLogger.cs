@@ -1,10 +1,10 @@
 using System;
 using System.Reflection;
 using com.mahonkin.tim.extensions.Logging;
-using com.mahonkin.tim.logging;
+using com.mahonkin.tim.Logging.OSLog;
 using Microsoft.Extensions.Logging;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging;
+namespace com.mahonkin.tim.Logging.UnifiedLogging;
 
 /// <summary>
 /// <see cref="ILogger"/>Implementation that writes messages to the Apple Unified Logging framework. 
@@ -25,7 +25,6 @@ public class UnifiedLogger : ILogger
     #endregion Constructors
 
     #region Public Methods
-
     /// <inheritdoc/>
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
 

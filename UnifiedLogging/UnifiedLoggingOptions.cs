@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-namespace com.mahonkin.tim.logging.UnifiedLogging;
+namespace com.mahonkin.tim.Logging.UnifiedLogging;
 
 /// <inheritdoc cref="IOptions{T}"/>
 public class UnifiedLoggerOptions : IOptions<UnifiedLoggerOptions>
