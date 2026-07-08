@@ -1,6 +1,8 @@
 ﻿using Foundation;
+using Microsoft.Maui;
+using Microsoft.Maui.Hosting;
 
-namespace Maui;
+namespace com.mahonkin.tim.Logging.UnifiedLogging.Tests.Maui;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

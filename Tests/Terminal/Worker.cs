@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +26,12 @@ public class Worker : BackgroundService
                 {
                     _logger.Log(level, "Worker running at: {time}", DateTime.Now);
                 }
+                else
+                {
+                    _logger.LogInformation($"{level} is not enabled for logging.");
+                }
             }
+            await Task.Delay(2000, token);
         }
     }
 }

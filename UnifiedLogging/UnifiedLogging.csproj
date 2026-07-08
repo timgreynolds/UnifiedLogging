@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$(MSBuildProjectDirectory)\Version.props" />
     <PropertyGroup>
-        <TargetFrameworks>net9.0;</TargetFrameworks>
+        <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
         <OutputType>Library</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>com.mahonkin.tim.Logging.UnifiedLogging</RootNamespace>
+    	<BuildInParallel>false</BuildInParallel>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>Mahonkin.UnifiedLogging</PackageId>
         <Title>Apple Unified Logging implemented as a LoggerProvider.</Title>
@@ -25,7 +27,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 <!-- Increment Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
-		<MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
+	<MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
         <MinorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
         <BuildNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([MSBuild]::Add($([System.Version]::Parse($(LastReleaseVersion)).Build), 1))</BuildNumber>
         <VersionPrefix Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$(MajorNumber).$(MinorNumber).$(BuildNumber)</VersionPrefix>
@@ -42,7 +44,7 @@
         <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Mahonkin.OSLogger" Version="1.1.*" />
+        <PackageReference Include="Mahonkin.OSLogger" Version="[2.0.0]" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
     </ItemGroup>

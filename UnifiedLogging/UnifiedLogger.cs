@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using com.mahonkin.tim.extensions.Logging;
+using com.mahonkin.tim.Logging.OSLog;
 using Microsoft.Extensions.Logging;
 
 namespace com.mahonkin.tim.Logging.UnifiedLogging;
@@ -18,7 +19,7 @@ public class UnifiedLogger : ILogger
     /// <inheritdoc cref="ILogger"/>
     public UnifiedLogger(string category, Func<UnifiedLoggerOptions> getCurrentOptions)
     {
-        string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().FullName : getCurrentOptions().Subsystem;
+        string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().Name : getCurrentOptions().Subsystem;
         _logPtr = OSLogger.Create(subsystem ?? "UnifiedLogger", category);
     }
     #endregion Constructors

@@ -3,11 +3,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>com.mahonkin.tim.Logging.UnifiedLogging.Tests.Terminal</RootNamespace>
     <UserSecretsId>dotnet-Terminal-685e9f7e-5398-4b0b-9f66-1ca256932ff5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mahonkin.UnifiedLogging" Version="1.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.*" />
-    <ProjectReference Include="../../UnifiedLogging/UnifiedLogging.csproj" />
+    <PackageReference Include="Mahonkin.UnifiedLogging" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.*" />
   </ItemGroup>
 </Project>

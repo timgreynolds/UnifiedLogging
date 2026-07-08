@@ -1,7 +1,6 @@
-﻿using ObjCRuntime;
-using UIKit;
+﻿using UIKit;
 
-namespace Maui;
+namespace com.mahonkin.tim.Logging.UnifiedLogging.Tests.Maui;
 
 public class Program
 {
