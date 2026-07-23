@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$(MSBuildProjectDirectory)\Version.props" />
     <PropertyGroup>
-        <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst;net8.0;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
         <OutputType>Library</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>com.mahonkin.tim.Logging.UnifiedLogging</RootNamespace>
-    	<BuildInParallel>false</BuildInParallel>
+    	<BuildInParallel>true</BuildInParallel>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>Mahonkin.UnifiedLogging</PackageId>
         <Title>Apple Unified Logging implemented as a LoggerProvider.</Title>
         <Description>            
             Implementation of ILogger &amp; ILoggerProvider for Apple Unified Logging. Uses the Mahonkin.OSLogger package that provides a native Apple Unified Logging OSLog object to write log messages.
         </Description>
-        <Authors>Timothy Reynolds</Authors>
+        <Authors>Timothy G. Reynolds</Authors>
         <Company />
         <Copyright>Copyright © 2023-2026 Timothy Reynolds</Copyright>
         <PackageTags>macos;ios;maccatalyst;oslog;logging;log;logger;UnifiedLogging;maui;xamarin</PackageTags>
@@ -44,9 +44,10 @@
         <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Mahonkin.OSLogger" Version="[2.0.0]" />
+        <PackageReference Include="Mahonkin.OSLogger" Version="[2.0.0-19924]" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.*" />
     </ItemGroup>
 <!-- Set Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
     <Target Name="SaveLastReleaseVersion" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' And '$(VersionPrefix)' != '' ">

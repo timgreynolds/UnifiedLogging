@@ -17,9 +17,9 @@ public class UnifiedLogger : ILogger
 
     #region Constructors
     /// <inheritdoc cref="ILogger"/>
-    public UnifiedLogger(string category, Func<UnifiedLoggerOptions> getCurrentOptions)
+    public UnifiedLogger(string category, UnifiedLoggerOptions options)
     {
-        string? subsystem = string.IsNullOrEmpty(getCurrentOptions().Subsystem) ? Assembly.GetExecutingAssembly().GetName().Name : getCurrentOptions().Subsystem;
+        string? subsystem = string.IsNullOrEmpty(options.Subsystem) ? Assembly.GetExecutingAssembly().GetName().Name : options.Subsystem;
         _logPtr = OSLogger.Create(subsystem ?? "UnifiedLogger", category);
     }
     #endregion Constructors
@@ -29,10 +29,7 @@ public class UnifiedLogger : ILogger
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
 
     /// <inheritdoc/>
-    public bool IsEnabled(LogLevel logLevel)
-    {
-        return true;
-    }
+    public bool IsEnabled(LogLevel logLevel) => true;
 
     /// <inheritdoc/>
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)

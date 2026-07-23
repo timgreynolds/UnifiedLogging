@@ -2,14 +2,18 @@ using Microsoft.Extensions.Options;
 
 namespace com.mahonkin.tim.Logging.UnifiedLogging;
 
-/// <inheritdoc cref="IOptions{T}"/>
-public class UnifiedLoggerOptions : IOptions<UnifiedLoggerOptions>
+/// <summary>
+/// Options for the Unified Logging logger.
+/// </summary>
+public sealed class UnifiedLoggerOptions : IOptions<UnifiedLoggerOptions>
 {
     /// <summary>
     /// String to be used as the application-wide subsystem value.
     /// </summary>
     public string? Subsystem { get; set; }
 
-    /// <inheritdoc cref="IOptions{T}.Value" />
+    /// <summary>
+    /// Gets the configured UnifiedLoggerOptions instance.
+    /// </summary>
     public UnifiedLoggerOptions Value => this;
 }
