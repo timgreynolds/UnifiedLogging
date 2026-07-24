@@ -29,11 +29,13 @@ public class UnifiedLogger : ILogger
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
 
     /// <inheritdoc/>
-    public bool IsEnabled(LogLevel logLevel) => true;
+    public bool IsEnabled(LogLevel logLevel) => OSLogger.IsEnabled(_logPtr, logLevel.LogType());
 
     /// <inheritdoc/>
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
+        if (!IsEnabled(logLevel)) return;
+
         OSLogger.Log(_logPtr, logLevel.LogType(), formatter(state, exception));
     }
     #endregion Public Methods

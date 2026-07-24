@@ -32,6 +32,6 @@ public sealed class UnifiedLoggerProvider : ILoggerProvider
 
     private void UpdateOptions(UnifiedLoggerOptions options)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException(nameof(UpdateOptions));
     }
 }
