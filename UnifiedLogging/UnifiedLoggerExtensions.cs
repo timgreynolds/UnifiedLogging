@@ -1,4 +1,5 @@
 using System;
+using com.mahonkin.tim.Logging.OSLog;
 using com.mahonkin.tim.Logging.UnifiedLogging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,6 +20,7 @@ public static class UnifiedLoggingExtensions
     {
         builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, UnifiedLoggerProvider>());
         LoggerProviderOptions.RegisterProviderOptions<UnifiedLoggerOptions, UnifiedLoggerProvider>(builder.Services);
+        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IFormatProvider, OSLogFormatter>());
         return builder;
     }
 

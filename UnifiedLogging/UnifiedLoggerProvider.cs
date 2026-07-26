@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using com.mahonkin.tim.Logging.OSLog;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -7,31 +10,15 @@ namespace com.mahonkin.tim.Logging.UnifiedLogging;
 
 /// <inheritdoc cref="ILoggerProvider"/>
 [ProviderAlias("UnifiedLogging")]
-public sealed class UnifiedLoggerProvider : ILoggerProvider
+public sealed class UnifiedLoggerProvider(IOptionsMonitor<UnifiedLoggerOptions> options, IEnumerable<IFormatProvider> formatProviders) : ILoggerProvider
 {
     private readonly ConcurrentDictionary<string, UnifiedLogger> _loggers = new ConcurrentDictionary<string, UnifiedLogger>(StringComparer.OrdinalIgnoreCase);
-    private IOptionsMonitor<UnifiedLoggerOptions> _options;
-    private readonly IDisposable? _onChangeToken;
-
-    /// <inheritdoc cref="ILoggerProvider"/>
-    public UnifiedLoggerProvider(IOptionsMonitor<UnifiedLoggerOptions> options)
-    {
-        _options = options;
-        _onChangeToken = options.OnChange(UpdateOptions);
-    }
+    private readonly IFormatProvider _formatter = formatProviders.FirstOrDefault(p => p.GetType() == typeof(OSLogFormatter)) ?? new OSLogFormatter();
+    private readonly string _subsystem = options.CurrentValue.Subsystem ?? "UnifiedLogging";
 
     /// <inheritdoc cref="ILoggerProvider.CreateLogger(string)"/>
-    public ILogger CreateLogger(string category) => _loggers.GetOrAdd(category, name => new UnifiedLogger(category, _options.CurrentValue));
+    public ILogger CreateLogger(string category) => _loggers.GetOrAdd(category, name => new UnifiedLogger(category, _subsystem, _formatter));
 
-    /// <inheritdoc cref="IDisposable"/>
-    public void Dispose()
-    {
-        _loggers.Clear();
-        _onChangeToken?.Dispose();
-    }
-
-    private void UpdateOptions(UnifiedLoggerOptions options)
-    {
-        throw new NotImplementedException(nameof(UpdateOptions));
-    }
+    /// <inheritdoc cref="IDisposable.Dispose()"/>
+    public void Dispose() => _loggers.Clear();
 }

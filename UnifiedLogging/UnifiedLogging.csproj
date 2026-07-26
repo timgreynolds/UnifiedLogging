@@ -44,7 +44,7 @@
         <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Mahonkin.OSLogger" Version="[2.0.0-19924]" />
+        <PackageReference Include="Mahonkin.OSLogger" Version="2.1.*" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.*" />
