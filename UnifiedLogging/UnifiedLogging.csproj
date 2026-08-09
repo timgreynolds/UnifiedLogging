@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="$(MSBuildProjectDirectory)\Version.props" />
     <PropertyGroup>
+        <SolutionDir Condition=" '$(SolutionDir)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), UnifiedLogging.sln))\</SolutionDir>
         <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst;net8.0;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
         <OutputType>Library</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -15,8 +16,8 @@
         </Description>
         <Authors>Timothy G. Reynolds</Authors>
         <Company />
-        <Copyright>Copyright © 2023-2026 Timothy Reynolds</Copyright>
-        <PackageTags>macos;ios;maccatalyst;oslog;logging;log;logger;UnifiedLogging;maui;xamarin</PackageTags>
+        <Copyright>Copyright © 2023-2026 Timothy G. Reynolds</Copyright>
+        <PackageTags>macos;ios;maccatalyst;oslog;logging;logging-provider;log;logger;unified-logging;maui;xamarin</PackageTags>
         <PackageProjectUrl>https://github.com/timgreynolds/UnifiedLogging </PackageProjectUrl>
         <RepositoryUrl>git@github.com:timgreynolds/UnifiedLogging.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
@@ -25,40 +26,53 @@
         <PackageIcon>Logo.png</PackageIcon>
         <PackageReleaseNotes />
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" $(Configuration.Contains('Debug'))">
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-<!-- Increment Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
-	<MajorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
-        <MinorNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
-        <BuildNumber Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$([MSBuild]::Add($([System.Version]::Parse($(LastReleaseVersion)).Build), 1))</BuildNumber>
-        <VersionPrefix Condition=" '$(Configuration)' == 'Release' And 'LastReleaseVersion' != '' ">$(MajorNumber).$(MinorNumber).$(BuildNumber)</VersionPrefix>
-        <VersionSuffix Condition=" '$(Configuration)' == 'Release' " />
-        <VersionPrefix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseVersion' != '' ">$(LastReleaseVersion)</VersionPrefix>
+        <IncludeSymbols>true</IncludeSymbols>
+        <EmbedAllSources>true</EmbedAllSources>
+        <DebugType>Embedded</DebugType>
+        <VersionPrefix Condition=" 'LastReleaseVersion' != '' ">$(LastReleaseVersion)</VersionPrefix>
         <VersionSuffix Condition=" '$(Configuration)' == 'Debug' And 'LastReleaseDateTime' != '' ">$([System.Convert]::ToInt32($([System.TimeSpan]::FromTicks($([MsBuild]::Subtract($([System.DateTime]::Now.Ticks), $([System.DateTime]::Parse($(LastReleaseDateTime)).Ticks)))).TotalMinutes)))</VersionSuffix>
-<!-- -->
-        <IncludeSymbols Condition=" '$(Configuration)' == 'Debug' ">true</IncludeSymbols>
-        <EmbedAllSources Condition=" '$(Configuration)' == 'Debug' ">true</EmbedAllSources>
-        <DebugType Condition=" '$(Configuration)' == 'Debug' ">Embedded</DebugType>
+        <VersionSuffix Condition=" $(Configuration.Contains('Release')) And 'LastReleaseVersion' != '' ">DEBUG</VersionSuffix>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'DebugRelease'">
+        <OutputPath>bin\Debug</OutputPath>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+        <IncludeSymbols>false</IncludeSymbols>
+        <EmbedAllSources>false</EmbedAllSources>
+        <DebugType>none</DebugType>
+	    <MajorNumber Condition=" 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Major)</MajorNumber>
+        <MinorNumber Condition=" 'LastReleaseVersion' != '' ">$([System.Version]::Parse($(LastReleaseVersion)).Minor)</MinorNumber>
+        <!-- Increment Build Number on 'Release' build -->
+        <BuildNumber Condition=" 'LastReleaseVersion' != '' ">$([MSBuild]::Add($([System.Version]::Parse($(LastReleaseVersion)).Build), 1))</BuildNumber>
+        <VersionPrefix Condition=" 'LastReleaseVersion' != '' ">$(MajorNumber).$(MinorNumber).$(BuildNumber)</VersionPrefix>
+        <VersionSuffix />
     </PropertyGroup>
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
         <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Mahonkin.OSLogger" Version="2.1.*" />
+        <PackageReference Include="Mahonkin.OSLogger" Version="2.1.0-DEBUG" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.*" />
     </ItemGroup>
-<!-- Set Build Number on 'Release' build, otherwise append pre-release identifier based on the number of minutes elapsed since last Release. -->
     <Target Name="SaveLastReleaseVersion" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' And '$(VersionPrefix)' != '' ">
         <PropertyGroup>
-            <LinesToWrite>                
-                &lt;Project&gt;
-                &lt;PropertyGroup&gt;
-                &lt;LastReleaseVersion&gt;$(VersionPrefix)&lt;/LastReleaseVersion&gt;
-                &lt;LastReleaseDateTime&gt;$([System.DateTime]::Now.ToString(yyyy/MM/dd HH:mm:00))&lt;/LastReleaseDateTime&gt;
-                &lt;/PropertyGroup&gt;
-                &lt;/Project&gt;
+            <LinesToWrite>
+&lt;Project&gt;
+  &lt;PropertyGroup&gt;
+    &lt;LastReleaseVersion&gt;
+      $(VersionPrefix)
+    &lt;/LastReleaseVersion&gt;
+    &lt;LastReleaseDateTime&gt;
+      $([System.DateTime]::Now.ToString(yyyy/MM/dd HH:mm:00))
+    &lt;/LastReleaseDateTime&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;
             </LinesToWrite>
         </PropertyGroup>
         <WriteLinesToFile File="$(MSBuildProjectDirectory)\Version.props" Lines="$(LinesToWrite)" Overwrite="true" Encoding="UTF-8" />
