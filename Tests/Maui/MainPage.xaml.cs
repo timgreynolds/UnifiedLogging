@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls;
 
@@ -15,7 +14,7 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		foreach (string level in Enum.GetNames<LogLevel>())
 		{
-			_logger.LogDebug($"Adding {level} to the Picker list.");
+			_logger.LogDebug("Adding {level} to the Picker list.", level);
 			LevelPicker.Items.Add(level);
 		}
 		LevelPicker.SelectedIndex = (int)LogLevel.Debug;
@@ -25,8 +24,8 @@ public partial class MainPage : ContentPage
 	{
 		if (Enum.TryParse<LogLevel>(LevelPicker.SelectedItem.ToString(), out LogLevel result))
 		{
-			_logger.Log(result, $"{LevelPicker.SelectedItem.ToString()} logged.");
+			_logger.Log(result, "{item} logged.", LevelPicker.SelectedItem.ToString());
 		}
-		else _logger.LogWarning($"Could not parse {LevelPicker.SelectedItem.ToString()} as a LogLevel.");
+		else _logger.LogWarning("Could not parse {item} as a LogLevel.", LevelPicker.SelectedItem.ToString());
 	}
 }

@@ -28,10 +28,10 @@ public class Worker : BackgroundService
                 }
                 else
                 {
-                    _logger.LogInformation($"{level} is not enabled for logging.");
+                    _logger.LogInformation("{level} is not enabled for logging.", level);
                 }
             }
-            await Task.Delay(2000, token);
+            await Task.Delay(20000, token);
         }
     }
 }

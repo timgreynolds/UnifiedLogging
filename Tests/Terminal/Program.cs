@@ -13,6 +13,7 @@ internal class Program
     builder
       .Logging
         .ClearProviders()
+        .AddConsole()
         .AddUnifiedLogger()
         .AddDebug();
 

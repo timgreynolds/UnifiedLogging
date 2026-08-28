@@ -7,7 +7,7 @@
     <UserSecretsId>dotnet-Terminal-685e9f7e-5398-4b0b-9f66-1ca256932ff5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mahonkin.UnifiedLogging" Version="2.0.0" />
+    <PackageReference Include="Mahonkin.UnifiedLogging" Version="2.1.*" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.*" />
   </ItemGroup>
 </Project>
